@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jpweatherplot"
+version = "0.1.0"
+description = "Personal plotting helpers for Japanese school weather-chart symbols"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "matplotlib>=3.8"
+]
+
+[project.optional-dependencies]
+metpy = ["metpy>=1.6"]
+cartopy = ["cartopy>=0.23"]
+all = ["metpy>=1.6", "cartopy>=0.23"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
