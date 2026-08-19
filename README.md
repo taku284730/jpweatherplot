@@ -8,7 +8,9 @@ A Python library for drawing Japanese weather chart symbols used in science educ
 
 It is designed to work seamlessly with **Matplotlib**, **MetPy**, and **Cartopy**.
 
+## Weather Symbols
 
+![Weather Symbols](docs/images/weather_symbols_test_v7.png)
 
 気象通報教材で使うための、**日本式の天気図記号・風向風力記号・観測点モデル**を Matplotlib 上に描く個人用ライブラリです。
 
