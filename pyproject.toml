@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "jpweatherplot"
-version = "0.1.0"
+version = "0.1.1"
 description = "Personal plotting helpers for Japanese school weather-chart symbols"
 readme = "README.md"
 requires-python = ">=3.10"

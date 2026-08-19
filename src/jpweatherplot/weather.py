@@ -25,11 +25,11 @@ WEATHER_ALIASES = {
 }
 
 
-def _line(da, x1, y1, x2, y2, lw=1.15):
+def _line(da, x1, y1, x2, y2, lw=1.15, capstyle="round"):
     da.add_artist(
         Line2D(
             [x1, x2], [y1, y2],
-            color="black", linewidth=lw, solid_capstyle="round"
+            color="black", linewidth=lw, solid_capstyle=capstyle
         )
     )
 
@@ -59,11 +59,13 @@ def _modifier(da, cx, cy, r, text, *, fontsize=8.6, x_offset=2.7, y_offset=-0.55
 
 
 def _snow_spokes(da, cx, cy, r, lw=1.05):
+    # 線端が円周からはみ出さないよう、少し内側で止める。
+    spoke_r = max(0.0, r - max(1.0, lw * 0.9))
     for deg in (0, 60, 120):
         th = math.radians(deg)
-        dx = r * 0.90 * math.cos(th)
-        dy = r * 0.90 * math.sin(th)
-        _line(da, cx-dx, cy-dy, cx+dx, cy+dy, lw)
+        dx = spoke_r * math.cos(th)
+        dy = spoke_r * math.sin(th)
+        _line(da, cx-dx, cy-dy, cx+dx, cy+dy, lw, capstyle="butt")
 
 
 def make_weather_glyph(
@@ -89,7 +91,11 @@ def make_weather_glyph(
 
     elif weather == "晴れ":
         _circle(da, cx, cy, r, lw=line_width)
-        _line(da, cx, cy-r, cx, cy+r, line_width)
+        inset = max(0.9, line_width * 0.8)
+        _line(
+            da, cx, cy-r+inset, cx, cy+r-inset,
+            line_width, capstyle="butt"
+        )
 
     elif weather == "くもり":
         _circle(da, cx, cy, r, lw=line_width)
@@ -172,13 +178,21 @@ def make_weather_glyph(
         _circle(da, cx, cy, r, lw=line_width)
         da.add_artist(Wedge((cx, cy), r*0.96, 180, 360,
                             facecolor="black", edgecolor="none"))
-        _line(da, cx-r, cy, cx+r, cy, line_width)
+        inset = max(0.9, line_width * 0.8)
+        _line(
+            da, cx-r+inset, cy, cx+r-inset, cy,
+            line_width, capstyle="butt"
+        )
 
     elif weather == "雷強し":
         _circle(da, cx, cy, r, lw=line_width)
         da.add_artist(Wedge((cx, cy), r*0.96, 180, 360,
                             facecolor="black", edgecolor="none"))
-        _line(da, cx-r, cy, cx+r, cy, line_width)
+        inset = max(0.9, line_width * 0.8)
+        _line(
+            da, cx-r+inset, cy, cx+r-inset, cy,
+            line_width, capstyle="butt"
+        )
         _modifier(da, cx, cy, r, "ツ", fontsize=modifier_fontsize)
 
     elif weather == "不明":
@@ -206,3 +220,26 @@ def add_weather_symbol(
     )
     ax.add_artist(ab)
     return ab
+
+
+def add_blank_station_circle(
+    ax, x: float, y: float,
+    *,
+    xycoords="data",
+    zorder: int = 20,
+    radius: float = 8.0,
+    line_width: float = 0.95,
+):
+    """
+    生徒記入用の空の観測点円を置く。
+
+    make_weather_glyph("快晴") と同じ円描画を使うため、
+    既記入地点と空欄地点で円の大きさ・線幅が一致する。
+    """
+    return add_weather_symbol(
+        ax, x, y, "快晴",
+        xycoords=xycoords,
+        zorder=zorder,
+        radius=radius,
+        line_width=line_width,
+    )
