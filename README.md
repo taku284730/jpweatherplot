@@ -1,5 +1,15 @@
 # jpweatherplot
 
+A Python library for drawing Japanese weather chart symbols used in science education.
+
+![Station Model](docs/images/station_model_values_test.png)
+
+`jpweatherplot` is a Python library for drawing Japanese weather chart symbols, wind-force symbols, and station models used in Japanese science education.
+
+It is designed to work seamlessly with **Matplotlib**, **MetPy**, and **Cartopy**.
+
+
+
 気象通報教材で使うための、**日本式の天気図記号・風向風力記号・観測点モデル**を Matplotlib 上に描く個人用ライブラリです。
 
 > 気象庁公式ライブラリではありません。中学校理科教材向けに、教育出版の天気図記号を参考に調整した描画部品です。
