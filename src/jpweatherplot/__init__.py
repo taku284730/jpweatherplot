@@ -10,6 +10,15 @@ jpweatherplot
 from .weather import WEATHER_TYPES, WEATHER_ALIASES, add_weather_symbol, add_blank_station_circle, make_weather_glyph
 from .wind import WIND_DIRECTION_DEG, add_wind_force_symbol, make_wind_force_glyph
 from .station import add_station_model, add_station_model_geo
+from .stations import (
+    Station,
+    STATIONS,
+    get_station,
+    list_stations,
+    station_names,
+    regions,
+    find_stations,
+)
 
 __version__ = "0.1.1"
 
