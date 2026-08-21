@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# macOS
+.DS_Store
+
+# 作業用データ
+data/
+
+# シートメーカー本体は別リポジトリで管理予定
+kishou_sheet_maker_*.py
+
+# ルートに置いた作業用コピー
+/observations.py

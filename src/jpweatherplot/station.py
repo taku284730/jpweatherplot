@@ -84,7 +84,7 @@ def add_station_model(
     xycoords="data",
     zorder: int = 20,
 
-    symbol_radius: float = 6.2,
+    symbol_radius: float = 4.8,
     weather_line_width: float = 0.95,
     wind_line_width: float = 0.85,
 
